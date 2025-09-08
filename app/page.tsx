@@ -22,7 +22,7 @@ export default function Home() {
     "author": {
       "@type": "Organization",
       "name": "Celibacy Tracker",
-      "url": "https://celibacytracker.app"
+      "url": "https://celibacytracker.com"
     },
     "downloadUrl": "https://apps.apple.com/app/celibacy-tracker/id6739954035?l=en-GB"
   };

@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Celibacy Tracker - Track Streaks, Benefits & Journal",
     description: "Track your celibacy journey with daily benefits, educational content, and personal journal. Transform your life one day at a time.",
-    url: "https://celibacy-tracker.vercel.app",
+    url: "https://celibacytracker.com",
     siteName: "Celibacy Tracker",
     type: "website",
     images: [
