@@ -14,9 +14,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://celibacytracker.com"),
   title: "Celibacy Tracker - Track Streaks, Benefits & Journal",
   description: "Track your celibacy journey with daily benefits, educational content, and personal journal. Monitor your streak, unlock benefits as days pass, and transform your life.",
-  keywords: "celibacy tracker, nofap tracker, semen retention, streak counter, benefits tracker, personal journal, celibacy benefits, self-improvement app",
+  keywords: "celibacy tracker, nofap tracker, semen retention, streak counter, benefits tracker, personal journal, celibacy benefits, self-improvement app, celibacy app android, celibacy app ios",
   authors: [{ name: "Celibacy Tracker" }],
   openGraph: {
     title: "Celibacy Tracker - Track Streaks, Benefits & Journal",
@@ -36,7 +37,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Celibacy Tracker",
-    description: "Track your celibacy streak and unlock daily benefits. Download on App Store.",
+    description: "Track your celibacy streak and unlock daily benefits. Download on App Store and Google Play.",
     images: ["/twitter-image.png"],
   },
   robots: {
