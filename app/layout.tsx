@@ -25,20 +25,11 @@ export const metadata: Metadata = {
     url: "https://celibacytracker.com",
     siteName: "Celibacy Tracker",
     type: "website",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Celibacy Tracker App",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Celibacy Tracker",
     description: "Track your celibacy streak and unlock daily benefits. Download on App Store and Google Play.",
-    images: ["/twitter-image.png"],
   },
   robots: {
     index: true,
@@ -55,6 +46,9 @@ export const metadata: Metadata = {
     title: "Celibacy Tracker",
     statusBarStyle: "black-translucent",
     capable: true,
+  },
+  alternates: {
+    canonical: "/",
   },
 };
 

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { blogPosts } from "./posts";
@@ -15,6 +16,9 @@ export const metadata: Metadata = {
     url: "https://celibacytracker.com/blog",
     siteName: "Celibacy Tracker",
     type: "website",
+  },
+  alternates: {
+    canonical: "/blog",
   },
 };
 
@@ -62,11 +66,12 @@ export default function BlogPage() {
                 className="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-md transition-shadow"
               >
                 <Link href={`/blog/${post.slug}`}>
-                  <img
+                  <Image
                     src={post.heroImage}
                     alt={post.heroAlt}
+                    width={800}
+                    height={320}
                     className="w-full h-52 object-cover"
-                    loading="lazy"
                   />
                 </Link>
                 <div className="p-8">
@@ -106,15 +111,13 @@ export default function BlogPage() {
             <span className="text-xl font-bold text-gray-900">
               <span className="text-purple-600">🔥</span> Celibacy Tracker
             </span>
-            <span className="text-gray-600">© 2025</span>
+            <span className="text-gray-600">© 2026</span>
           </div>
           <div className="flex items-center gap-6 text-sm text-gray-600">
-            <Link href="/blog" className="hover:text-gray-900">
-              Blog
-            </Link>
-            <a href="mailto:info@nicomelian.com" className="hover:text-gray-900">
-              Contact
-            </a>
+            <Link href="/blog" className="hover:text-gray-900">Blog</Link>
+            <Link href="/privacy" className="hover:text-gray-900">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-gray-900">Terms of Service</Link>
+            <a href="mailto:info@nicomelian.com" className="hover:text-gray-900">Contact</a>
           </div>
         </div>
       </footer>

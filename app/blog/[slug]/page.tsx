@@ -1,7 +1,9 @@
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { blogPosts } from "../posts";
+import { DownloadButtons } from "../../components/DownloadButtons";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -24,7 +26,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: `${post.title} | Celibacy Tracker Blog`,
     description: post.description,
-    keywords: `celibacy, ${post.slug.replace(/-/g, ", ")}, celibacy tracker, self-improvement`,
     openGraph: {
       title: post.title,
       description: post.description,
@@ -32,19 +33,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       siteName: "Celibacy Tracker",
       type: "article",
       publishedTime: post.date,
-      images: [
-        {
-          url: post.heroImage,
-          width: 1200,
-          height: 675,
-          alt: post.heroAlt,
-        },
-      ],
     },
     twitter: {
       card: "summary_large_image",
       title: post.title,
       description: post.description,
+    },
+    alternates: {
+      canonical: `/blog/${post.slug}`,
     },
   };
 }
@@ -116,11 +112,12 @@ function renderMarkdown(content: string) {
       if (match) {
         elements.push(
           <figure key={elements.length} className="my-8">
-            <img
+            <Image
               src={match[2]}
               alt={match[1]}
+              width={800}
+              height={400}
               className="w-full rounded-2xl shadow-md"
-              loading="lazy"
             />
             {match[1] && (
               <figcaption className="text-center text-sm text-gray-500 mt-3">
@@ -154,27 +151,58 @@ export default async function BlogPostPage({ params }: PageProps) {
     notFound();
   }
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    headline: post.title,
-    description: post.description,
-    datePublished: post.date,
-    author: {
-      "@type": "Organization",
-      name: "Celibacy Tracker",
-      url: "https://celibacytracker.com",
+  const relatedPosts = blogPosts
+    .filter((p) => p.slug !== post.slug)
+    .slice(0, 3);
+
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      headline: post.title,
+      description: post.description,
+      datePublished: post.date,
+      dateModified: post.date,
+      image: `https://celibacytracker.com${post.heroImage}`,
+      author: {
+        "@type": "Organization",
+        name: "Celibacy Tracker",
+        url: "https://celibacytracker.com",
+      },
+      publisher: {
+        "@type": "Organization",
+        name: "Celibacy Tracker",
+        url: "https://celibacytracker.com",
+      },
+      mainEntityOfPage: {
+        "@type": "WebPage",
+        "@id": `https://celibacytracker.com/blog/${post.slug}`,
+      },
     },
-    publisher: {
-      "@type": "Organization",
-      name: "Celibacy Tracker",
-      url: "https://celibacytracker.com",
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: "https://celibacytracker.com",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Blog",
+          item: "https://celibacytracker.com/blog",
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: post.title,
+        },
+      ],
     },
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": `https://celibacytracker.com/blog/${post.slug}`,
-    },
-  };
+  ];
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white">
@@ -208,14 +236,21 @@ export default async function BlogPostPage({ params }: PageProps) {
 
       <main className="px-6 md:px-12 lg:px-20 py-16">
         <article className="max-w-3xl mx-auto">
-          <div className="mb-8">
-            <Link
-              href="/blog"
-              className="text-purple-600 hover:text-purple-700 text-sm font-medium"
-            >
-              ← Back to Blog
-            </Link>
-          </div>
+          <nav aria-label="Breadcrumb" className="mb-8">
+            <ol className="flex items-center gap-2 text-sm text-gray-500">
+              <li>
+                <Link href="/" className="hover:text-gray-900">Home</Link>
+              </li>
+              <li>/</li>
+              <li>
+                <Link href="/blog" className="hover:text-gray-900">Blog</Link>
+              </li>
+              <li>/</li>
+              <li className="text-gray-900 font-medium truncate max-w-[200px] sm:max-w-none">
+                {post.title}
+              </li>
+            </ol>
+          </nav>
 
           <div className="flex items-center gap-3 text-sm text-gray-500 mb-4">
             <time dateTime={post.date}>
@@ -233,10 +268,13 @@ export default async function BlogPostPage({ params }: PageProps) {
             {post.title}
           </h1>
 
-          <img
+          <Image
             src={post.heroImage}
             alt={post.heroAlt}
+            width={800}
+            height={400}
             className="w-full rounded-2xl shadow-md mb-10"
+            priority
           />
 
           <div className="prose prose-lg max-w-none space-y-4">
@@ -250,34 +288,42 @@ export default async function BlogPostPage({ params }: PageProps) {
             <p className="text-gray-600 mb-6">
               Download Celibacy Tracker and start monitoring your progress today.
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-              <a
-                href="https://apps.apple.com/app/celibacy-tracker/id6739954035?l=en-GB"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block hover:scale-105 transition-transform"
-              >
-                <img
-                  src="/applebutton.png"
-                  alt="Download on the App Store"
-                  className="h-14 w-auto"
-                />
-              </a>
-              <a
-                href="https://play.google.com/store/apps/details?id=com.nicomelian.celibacytracker"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block hover:scale-105 transition-transform"
-              >
-                <img
-                  src="/playstore.png"
-                  alt="Get it on Google Play"
-                  className="h-14 w-auto"
-                />
-              </a>
-            </div>
+            <DownloadButtons className="justify-center" />
           </div>
         </article>
+
+        {relatedPosts.length > 0 && (
+          <section className="max-w-3xl mx-auto mt-20">
+            <h2 className="text-2xl font-bold text-gray-900 mb-8">
+              Related Articles
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+              {relatedPosts.map((related) => (
+                <Link
+                  key={related.slug}
+                  href={`/blog/${related.slug}`}
+                  className="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-md transition-shadow group"
+                >
+                  <Image
+                    src={related.heroImage}
+                    alt={related.heroAlt}
+                    width={400}
+                    height={160}
+                    className="w-full h-32 object-cover"
+                  />
+                  <div className="p-4">
+                    <h3 className="text-sm font-bold text-gray-900 group-hover:text-purple-600 transition-colors line-clamp-2">
+                      {related.title}
+                    </h3>
+                    <span className="text-xs text-gray-500 mt-2 block">
+                      {related.readTime}
+                    </span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
       </main>
 
       <footer className="bg-gray-50 py-8 px-6 md:px-12 lg:px-20">
@@ -286,15 +332,13 @@ export default async function BlogPostPage({ params }: PageProps) {
             <span className="text-xl font-bold text-gray-900">
               <span className="text-purple-600">🔥</span> Celibacy Tracker
             </span>
-            <span className="text-gray-600">© 2025</span>
+            <span className="text-gray-600">© 2026</span>
           </div>
           <div className="flex items-center gap-6 text-sm text-gray-600">
-            <Link href="/blog" className="hover:text-gray-900">
-              Blog
-            </Link>
-            <a href="mailto:info@nicomelian.com" className="hover:text-gray-900">
-              Contact
-            </a>
+            <Link href="/blog" className="hover:text-gray-900">Blog</Link>
+            <Link href="/privacy" className="hover:text-gray-900">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-gray-900">Terms of Service</Link>
+            <a href="mailto:info@nicomelian.com" className="hover:text-gray-900">Contact</a>
           </div>
         </div>
       </footer>
