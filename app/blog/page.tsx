@@ -28,7 +28,7 @@ export default function BlogPage() {
       <nav className="flex items-center justify-between px-6 py-4 md:px-12 lg:px-20">
         <Link href="/" className="flex items-center gap-2">
           <span className="text-2xl font-bold text-gray-900">
-            <span className="text-purple-600">🔥</span> Celibacy Tracker
+            Celibacy Tracker
           </span>
         </Link>
         <div className="flex items-center gap-6">
@@ -109,7 +109,7 @@ export default function BlogPage() {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <span className="text-xl font-bold text-gray-900">
-              <span className="text-purple-600">🔥</span> Celibacy Tracker
+              Celibacy Tracker
             </span>
             <span className="text-gray-600">© 2026</span>
           </div>

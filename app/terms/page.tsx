@@ -13,7 +13,7 @@ export default function TermsOfService() {
       <nav className="flex items-center justify-between px-6 py-4 md:px-12 lg:px-20 border-b border-gray-100">
         <Link href="/" className="flex items-center gap-2">
           <span className="text-2xl font-bold text-gray-900">
-            <span className="text-purple-600">🔥</span> Celibacy Tracker
+            Celibacy Tracker
           </span>
         </Link>
       </nav>

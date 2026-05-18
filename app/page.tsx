@@ -101,7 +101,7 @@ export default function Home() {
       <nav className="absolute top-0 left-0 right-0 z-10 flex items-center justify-between px-6 py-4 md:px-12 lg:px-20">
         <div className="flex items-center gap-2">
           <span className="text-2xl font-bold text-gray-900">
-            <span className="text-purple-600">🔥</span> Celibacy Tracker
+            Celibacy Tracker
           </span>
         </div>
         <div className="flex items-center gap-6">
@@ -160,7 +160,7 @@ export default function Home() {
                   <Image src="/avatar-4.jpg" alt="" width={40} height={40} className="w-10 h-10 rounded-full border-2 border-white object-cover" />
                 </div>
                 <div className="text-sm text-gray-600">
-                  <div className="font-semibold text-gray-900">500+ active users</div>
+                  <div className="font-semibold text-gray-900">5,300+ active users</div>
                   <div className="flex items-center gap-1">
                     <span className="text-yellow-500">★★★★★</span>
                     <span>4.9/5 rating</span>
@@ -392,7 +392,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <span className="text-xl font-bold text-gray-900">
-              <span className="text-purple-600">🔥</span> Celibacy Tracker
+              Celibacy Tracker
             </span>
             <span className="text-gray-600">© 2026</span>
           </div>

@@ -115,15 +115,11 @@ function renderMarkdown(content: string) {
             <Image
               src={match[2]}
               alt={match[1]}
-              width={800}
-              height={400}
+              width={1200}
+              height={675}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 800px"
               className="w-full rounded-2xl shadow-md"
             />
-            {match[1] && (
-              <figcaption className="text-center text-sm text-gray-500 mt-3">
-                {match[1]}
-              </figcaption>
-            )}
           </figure>
         );
       }
@@ -241,7 +237,7 @@ export default async function BlogPostPage({ params }: PageProps) {
       <nav className="flex items-center justify-between px-6 py-4 md:px-12 lg:px-20">
         <Link href="/" className="flex items-center gap-2">
           <span className="text-2xl font-bold text-gray-900">
-            <span className="text-purple-600">🔥</span> Celibacy Tracker
+            Celibacy Tracker
           </span>
         </Link>
         <div className="flex items-center gap-6">
@@ -358,7 +354,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <span className="text-xl font-bold text-gray-900">
-              <span className="text-purple-600">🔥</span> Celibacy Tracker
+              Celibacy Tracker
             </span>
             <span className="text-gray-600">© 2026</span>
           </div>
