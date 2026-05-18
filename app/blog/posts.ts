@@ -2127,7 +2127,7 @@ Free on **iOS** and **Android**.
     readTime: "10 min read",
     heroImage: "https://images.unsplash.com/photo-1502082553048-f009c37129b9?w=1600&q=80&auto=format&fit=crop",
     heroAlt: "Foggy forest with light breaking through, representing brain fog clearing into clarity",
-    content: \`
+    content: `
 ## The Short Answer
 
 For most men, the worst of NoFap brain fog clears between **week 2 and week 6**. Significant mental clarity usually returns by **day 30 to day 45**. Full cognitive recovery, the kind where focus, memory, and processing speed feel sharper than they did before you started, typically lands around **day 60 to day 90**.
@@ -2335,6 +2335,6 @@ The recovery is real, it's measurable, and it lasts. Don't quit during the withd
 Track the streak. Trust the process. The clarity is coming.
 
 Free on **iOS** and **Android**.
-    \`,
+    `,
   },
 ];
