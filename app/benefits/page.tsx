@@ -200,7 +200,7 @@ export default function BenefitsPage() {
             Blog
           </Link>
           <a
-            href="https://apps.apple.com/app/celibacy-tracker/id6739954035?l=en-GB"
+            href="https://apps.apple.com/app/apple-store/id6739954035?pt=127407326&ct=web&mt=8"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-black text-white px-6 py-2.5 rounded-full font-medium hover:bg-gray-800 transition-colors text-sm md:text-base"

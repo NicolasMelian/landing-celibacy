@@ -127,6 +127,34 @@ function renderMarkdown(content: string) {
           </figure>
         );
       }
+    } else if (/^\{cta\}.*\{\/cta\}$/.test(trimmed)) {
+      flushList();
+      const match = trimmed.match(/^\{cta\}(.*)\{\/cta\}$/);
+      if (match) {
+        elements.push(
+          <aside
+            key={elements.length}
+            className="my-8 rounded-2xl border border-purple-200 bg-gradient-to-br from-purple-50 to-white p-6 shadow-sm"
+          >
+            <div className="flex items-start gap-3 mb-4">
+              <span className="text-2xl">🔥</span>
+              <p
+                className="text-gray-800 font-medium leading-relaxed"
+                dangerouslySetInnerHTML={{ __html: inlineFormat(match[1]) }}
+              />
+            </div>
+            <a
+              href="https://apps.apple.com/app/apple-store/id6739954035?pt=127407326&ct=web&mt=8"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-black text-white px-5 py-2.5 rounded-full font-medium text-sm hover:bg-gray-800 transition-colors"
+            >
+              Download on App Store
+              <span aria-hidden="true">→</span>
+            </a>
+          </aside>
+        );
+      }
     } else {
       flushList();
       elements.push(
@@ -224,7 +252,7 @@ export default async function BlogPostPage({ params }: PageProps) {
             Blog
           </Link>
           <a
-            href="https://apps.apple.com/app/celibacy-tracker/id6739954035?l=en-GB"
+            href="https://apps.apple.com/app/apple-store/id6739954035?pt=127407326&ct=web&mt=8"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-black text-white px-6 py-2.5 rounded-full font-medium hover:bg-gray-800 transition-colors text-sm md:text-base"

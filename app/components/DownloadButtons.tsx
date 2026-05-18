@@ -15,7 +15,7 @@ export function DownloadButtons({
   return (
     <div className={`flex flex-col sm:flex-row items-center gap-3 ${className}`}>
       <a
-        href="https://apps.apple.com/app/celibacy-tracker/id6739954035?l=en-GB"
+        href="https://apps.apple.com/app/apple-store/id6739954035?pt=127407326&ct=web&mt=8"
         target="_blank"
         rel="noopener noreferrer"
         className="inline-block hover:scale-105 transition-transform"
