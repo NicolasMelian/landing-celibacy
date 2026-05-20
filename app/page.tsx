@@ -72,11 +72,6 @@ export default function Home() {
       "price": "0",
       "priceCurrency": "USD"
     },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.9",
-      "ratingCount": "500"
-    },
     "author": {
       "@type": "Organization",
       "name": "Celibacy Tracker",
@@ -116,6 +111,12 @@ export default function Home() {
             className="text-gray-600 hover:text-gray-900 font-medium text-sm md:text-base hidden md:inline"
           >
             Calculator
+          </Link>
+          <Link
+            href="/savings-calculator"
+            className="text-gray-600 hover:text-gray-900 font-medium text-sm md:text-base hidden lg:inline"
+          >
+            Savings
           </Link>
           <Link
             href="/blog"

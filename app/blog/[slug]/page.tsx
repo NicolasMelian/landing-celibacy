@@ -76,6 +76,10 @@ function renderMarkdown(content: string) {
 
   const inlineFormat = (text: string): string => {
     return text
+      .replace(
+        /\[([^\]]+)\]\(([^)]+)\)/g,
+        '<a href="$2" class="text-purple-600 underline hover:text-purple-700">$1</a>'
+      )
       .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
       .replace(/\*(.+?)\*/g, "<em>$1</em>");
   };
@@ -139,15 +143,7 @@ function renderMarkdown(content: string) {
                 dangerouslySetInnerHTML={{ __html: inlineFormat(match[1]) }}
               />
             </div>
-            <a
-              href="https://apps.apple.com/app/apple-store/id6739954035?pt=127407326&ct=web&mt=8"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-black text-white px-5 py-2.5 rounded-full font-medium text-sm hover:bg-gray-800 transition-colors"
-            >
-              Download on App Store
-              <span aria-hidden="true">→</span>
-            </a>
+            <DownloadButtons />
           </aside>
         );
       }
@@ -179,54 +175,57 @@ export default async function BlogPostPage({ params }: PageProps) {
     .filter((p) => p.slug !== post.slug)
     .slice(0, 3);
 
-  const jsonLd = [
-    {
-      "@context": "https://schema.org",
-      "@type": "BlogPosting",
-      headline: post.title,
-      description: post.description,
-      datePublished: post.date,
-      dateModified: post.date,
-      image: `https://celibacytracker.com${post.heroImage}`,
-      author: {
-        "@type": "Organization",
-        name: "Celibacy Tracker",
-        url: "https://celibacytracker.com",
-      },
-      publisher: {
-        "@type": "Organization",
-        name: "Celibacy Tracker",
-        url: "https://celibacytracker.com",
-      },
-      mainEntityOfPage: {
-        "@type": "WebPage",
-        "@id": `https://celibacytracker.com/blog/${post.slug}`,
-      },
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        {
-          "@type": "ListItem",
-          position: 1,
-          name: "Home",
-          item: "https://celibacytracker.com",
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        headline: post.title,
+        description: post.description,
+        datePublished: post.date,
+        dateModified: post.date,
+        image: post.heroImage.startsWith("http")
+          ? post.heroImage
+          : `https://celibacytracker.com${post.heroImage}`,
+        author: {
+          "@type": "Organization",
+          name: "Celibacy Tracker",
+          url: "https://celibacytracker.com",
         },
-        {
-          "@type": "ListItem",
-          position: 2,
-          name: "Blog",
-          item: "https://celibacytracker.com/blog",
+        publisher: {
+          "@type": "Organization",
+          name: "Celibacy Tracker",
+          url: "https://celibacytracker.com",
         },
-        {
-          "@type": "ListItem",
-          position: 3,
-          name: post.title,
+        mainEntityOfPage: {
+          "@type": "WebPage",
+          "@id": `https://celibacytracker.com/blog/${post.slug}`,
         },
-      ],
-    },
-  ];
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: "https://celibacytracker.com",
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Blog",
+            item: "https://celibacytracker.com/blog",
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: post.title,
+          },
+        ],
+      },
+    ],
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white">
