@@ -1,6 +1,12 @@
 import { ImageResponse } from "next/og";
 import { blogPosts } from "../posts";
 
+export const dynamic = "force-static";
+
+export function generateStaticParams() {
+  return blogPosts.map((p) => ({ slug: p.slug }));
+}
+
 export const alt = "Celibacy Tracker Blog";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
